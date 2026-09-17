@@ -119,10 +119,10 @@
     <h2>Why we&rsquo;re asking</h2>
     <ul>
       <li>We&rsquo;ll set SESC&rsquo;s 2026&ndash;27 goals at our next meeting</li>
-      <li>These are the same questions we asked prospective members, so we can compare perspectives across the whole group</li>
+      <li>These are drawn from the questions we asked prospective members, so we can compare perspectives across the whole group</li>
       <li>Your answers will be summarized (not attributed by name) for the discussion</li>
     </ul>
-    <p class="sub" style="margin:10px 0 0">About 5 minutes. Questions marked <span class="req">*</span> are required.</p>
+    <p class="sub" style="margin:10px 0 0">About 3 minutes. Questions marked <span class="req">*</span> are required.</p>
   </div>
 
   <form id="sescForm" novalidate>
@@ -134,44 +134,8 @@
 
       <div class="card">
         <h2>About you</h2>
-        <div class="grid2">
-          <div>
-            <label class="field-label" for="your_name">Name <span class="req">*</span></label>
-            <input type="text" id="your_name" name="your_name" autocomplete="name">
-          </div>
-          <div>
-            <label class="field-label" for="your_email">U-M email <span class="req">*</span></label>
-            <input type="email" id="your_email" name="your_email" autocomplete="email" placeholder="uniqname@med.umich.edu">
-          </div>
-          <div>
-            <label class="field-label" for="department">Department / unit</label>
-            <input type="text" id="department" name="department">
-          </div>
-          <div>
-            <label class="field-label" for="job_title">Job title</label>
-            <input type="text" id="job_title" name="job_title">
-          </div>
-        </div>
-
-        <label class="field-label">Years at U-M / Michigan Medicine</label>
-        <div class="options two-col">
-          <label><input type="radio" name="years_service" value="Less than 2 years"> Less than 2 years</label>
-          <label><input type="radio" name="years_service" value="2 to 5 years"> 2&ndash;5 years</label>
-          <label><input type="radio" name="years_service" value="6 to 10 years"> 6&ndash;10 years</label>
-          <label><input type="radio" name="years_service" value="11 to 20 years"> 11&ndash;20 years</label>
-          <label><input type="radio" name="years_service" value="More than 20 years"> More than 20 years</label>
-        </div>
-
-        <label class="field-label">Primary work location</label>
-        <div class="options two-col">
-          <label><input type="radio" name="work_location" value="Medical campus"> Medical campus (Med Sci, BSRB, Taubman, etc.)</label>
-          <label><input type="radio" name="work_location" value="Hospital"> Hospital / clinical site</label>
-          <label><input type="radio" name="work_location" value="NCRC"> NCRC</label>
-          <label><input type="radio" name="work_location" value="Remote"> Mostly or fully remote</label>
-          <label><input type="radio" name="work_location" value="Hybrid"> Hybrid (mix of on-site and remote)</label>
-          <label><input type="radio" name="work_location" value="Other"> Other</label>
-        </div>
-        <input type="text" id="work_location_other" name="work_location_other" class="other-text hidden" placeholder="Where do you primarily work?">
+        <label class="field-label" for="your_name">Name <span class="req">*</span></label>
+        <input type="text" id="your_name" name="your_name" autocomplete="name">
       </div>
 
       <div class="card">
@@ -186,29 +150,9 @@
         <textarea id="q2_issues" name="q2_issues"></textarea>
       </div>
 
-      <div class="card">
-        <h2>3. What perspective do you bring to the committee?</h2>
-        <p class="sub">Check all that apply.</p>
-        <div class="options two-col">
-          <label><input type="checkbox" name="persp_research_staff" value="1"> Research staff</label>
-          <label><input type="checkbox" name="persp_research_admin" value="1"> Research administration</label>
-          <label><input type="checkbox" name="persp_admin" value="1"> Administrative staff</label>
-          <label><input type="checkbox" name="persp_clinical_support" value="1"> Clinical support</label>
-          <label><input type="checkbox" name="persp_basic_science" value="1"> Basic science</label>
-          <label><input type="checkbox" name="persp_education" value="1"> Education</label>
-          <label><input type="checkbox" name="persp_early_career" value="1"> Early career</label>
-          <label><input type="checkbox" name="persp_remote_hybrid" value="1"> Remote / hybrid</label>
-          <label><input type="checkbox" name="persp_manager" value="1"> Staff manager</label>
-          <label><input type="checkbox" name="persp_individual_contributor" value="1"> Individual contributor</label>
-          <label><input type="checkbox" name="persp_other" value="1" id="perspOtherCb"> Other</label>
-        </div>
-        <input type="text" id="persp_other_text" name="persp_other_text" class="other-text hidden" placeholder="Tell us more">
-        <label class="field-label" for="persp_elaborate">Anything you&rsquo;d like to add about the perspective you bring? (optional)</label>
-        <textarea id="persp_elaborate" name="persp_elaborate" style="min-height:70px"></textarea>
-      </div>
 
       <div class="card">
-        <h2>4. What is one thing Medical School leadership should better understand about the staff experience?</h2>
+        <h2>3. What is one thing Medical School leadership should better understand about the staff experience?</h2>
         <textarea id="q4_leadership" name="q4_leadership"></textarea>
       </div>
 
@@ -278,8 +222,6 @@ function bindOtherToggle(ctrlSelector, target, isRadioGroup) {
     });
   });
 }
-bindOtherToggle('input[name="work_location"]', "work_location_other", true);
-bindOtherToggle("#perspOtherCb", "persp_other_text", false);
 
 // ----- Q1 word counter -----
 function wordCount(s) {
@@ -346,7 +288,6 @@ function validate() {
   var errors = [];
   if (type === "member") {
     if (!val("your_name")) errors.push("Please enter your name.");
-    if (!val("your_email")) errors.push("Please enter your U-M email.");
     if (!val("q1_interest")) errors.push("Please answer question 1 (what you'd like SESC to accomplish).");
     if (wordCount(val("q1_interest")) > Q1_WORD_LIMIT)
       errors.push("Question 1 is over the " + Q1_WORD_LIMIT + "-word limit.");
